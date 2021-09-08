@@ -1,4 +1,0 @@
-package UByteExtensionsTest
-
-class BinarySequence {
-}
