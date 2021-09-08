@@ -1,0 +1,4 @@
+package UByteExtensionsTest
+
+class BinarySequence {
+}
