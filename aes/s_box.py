@@ -34,6 +34,8 @@ class SBox:
 
 	"""
 	Maps a byte to its S-box transformation.
+	
+	@:param byte is an int representing a byte as a decimal.  
 	"""
 	def get_transformation(self, byte):
 		# Format is "0x<nibble1><nibble2>", so we just split on the x and get the last element.
