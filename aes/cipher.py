@@ -80,7 +80,7 @@ class Cipher:
 	@staticmethod
 	def add_round_key(state, round_key):
 		"""
-		Given an input state and round_key, XOR state and round_key and return the resulting state.
+		Given an input state and round_key, XOR state's and round_key's COLUMNS and return the resulting state.
 
 		A' E' I' M'         As Es Is Ms       Ak Ek Ik Mk
 		B' F' J' N'    =    Bs Fs Js Ns  xor  Bk Fk Jk Nk
