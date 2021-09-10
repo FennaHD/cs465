@@ -82,11 +82,19 @@ class Cipher:
 		"""
 		Given an input state and round_key, XOR state's and round_key's COLUMNS and return the resulting state.
 
-		A' E' I' M'         As Es Is Ms       Ak Ek Ik Mk
-		B' F' J' N'    =    Bs Fs Js Ns  xor  Bk Fk Jk Nk
-		C' G' K' O'         Cs Gs Ks Os       Ck Gk Kk Ok
-		D' H' L' P'         Ds Hs Ls Ps       Dk Hk Lk Pk
-		 new_state			   state           round_key
+		A' E' I' M'       As Es Is Ms       Ak Ek Ik Mk
+		B' F' J' N'   =   Bs Fs Js Ns  xor  Bk Fk Jk Nk
+		C' G' K' O'       Cs Gs Ks Os       Ck Gk Kk Ok
+		D' H' L' P'       Ds Hs Ls Ps       Dk Hk Lk Pk
+		 new_state			 state           round_key
+
+		Column-by-column, as follows:
+
+		A'     As       Ak
+		B'  =  Bs  xor  Bk
+		C'     Cs       Ck
+		D'     Ds       Dk
+
 		"""
 		# Combine both arrays into one so that the columns that are supposed to be XORd match.
 		zipped = list(zip(state, round_key))
