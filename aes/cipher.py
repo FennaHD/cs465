@@ -36,7 +36,6 @@ class Cipher:
 				state[i][j] = sb.get_transformation(state[i][j])
 		return state
 
-
 	"""
 	The bytes in the last three rows of the State are cyclically
 	shifted over different numbers of bytes (offsets). The first row, r = 0, is not shifted.
@@ -50,3 +49,19 @@ class Cipher:
 	"""
 	@staticmethod
 	def shift_rows(state):
+		# This method would be easier if our state arrangement was horizontal instead of vertical,
+		# but since it isn't and we know our state will always be the same size, I believe the easiest way to do this is to hardcode the shifting.
+		# Create a temp row or otherwise the bytes will be overridden as we shift.
+		new_state = [[state[0][0], state[1][1], state[2][2], state[3][3]],
+		             [state[1][0], state[2][1], state[3][2], state[0][3]],
+		             [state[2][0], state[3][1], state[0][2], state[1][3]],
+		             [state[3][0], state[0][1], state[1][2], state[2][3]]]
+
+		return new_state
+
+	"""
+	
+	"""
+	@staticmethod
+	def mix_columns(state):
+

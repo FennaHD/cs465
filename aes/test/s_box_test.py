@@ -25,3 +25,7 @@ class SBoxTest(unittest.TestCase):
 	def test_transformation_top_left_corner(self):
 		self.assertEqual(0x63, self.sb.get_transformation(0x00))
 		self.assertNotEqual(0x76, self.sb.get_transformation(0x00))
+
+
+if __name__ == '__main__':
+	unittest.main()
