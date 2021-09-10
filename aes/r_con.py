@@ -1,7 +1,9 @@
-"""
-The array should only be accessed through the method
-"""
+
+
 class Rcon:
+	"""
+	The array should only be accessed through the method
+	"""
 	# r_con is 1-based, so the first entry is just a place holder
 	r_con = [0x00000000,
 				0x01000000, 0x02000000, 0x04000000, 0x08000000,
@@ -20,6 +22,16 @@ class Rcon:
 
 	@staticmethod
 	def get(index):
+		"""
+		Aside from just returning the word (4 bytes), it also converts it to the format chosen for the program, as such:
+
+		0x83000000 => [[0x83], [0x00], [0x00], [0x00]]
+
+		This will allow us to manipulate it and be consistent.
+		"""
 		if index == 0:
 			raise Exception("Rcon is 1-based, so index 0 should never be used.")
-		return Rcon.r_con[index]
+		# I noticed that only the highest byte is set, so just abstract that byte and fill the other bytes with zeros.
+		highest_order_byte = (Rcon.r_con[index] >> 24) & 0xff
+		return [highest_order_byte, 0x00, 0x00, 0x00]
+

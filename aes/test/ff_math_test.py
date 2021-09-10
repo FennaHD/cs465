@@ -4,17 +4,23 @@ import unittest
 
 class FFMathTest(unittest.TestCase):
 
-	def test_simple_ff_add_positive(self):
-		self.assertEqual(0xd4, ffm.add(0x57, 0x83))
+	def test_simple_ff_add_bytes_positive(self):
+		self.assertEqual(0xd4, ffm.add_bytes(0x57, 0x83))
 
-	def test_simple_ff_add_negative(self):
-		self.assertNotEqual(0xd3, ffm.add(0x57, 0x83))
+	def test_simple_ff_add_bytes_negative(self):
+		self.assertNotEqual(0xd3, ffm.add_bytes(0x57, 0x83))
 
-	def test_multi_byte_ff_add_positive(self):
-		self.assertEqual(0xfe, ffm.add(0x57, 0xae, 0x07))
+	def test_multi_byte_ff_add_bytes_positive(self):
+		self.assertEqual(0xfe, ffm.add_bytes(0x57, 0xae, 0x07))
 
-	def test_multi_byte_ff_add_negative(self):
-		self.assertNotEqual(0xff, ffm.add(0x57, 0xae, 0x07))
+	def test_multi_byte_ff_add_bytes_negative(self):
+		self.assertNotEqual(0xff, ffm.add_bytes(0x57, 0xae, 0x07))
+
+	def test_simple_ff_add_words_positive(self):
+		self.assertEqual([0xa4, 0x9c, 0x7f, 0xf2], ffm.add_words([0x04, 0x66, 0x81, 0xe5], [0xa0, 0xfa, 0xfe, 0x17]))
+
+	def test_simple_ff_add_words_negative(self):
+		self.assertNotEqual([0xa4, 0x9c, 0x7f, 0xff], ffm.add_words([0x04, 0x66, 0x81, 0xe5], [0xa0, 0xfa, 0xfe, 0x17]))
 
 	def test_x_time_no_overflow_positive(self):
 		self.assertEqual(0xae, ffm.x_time(0x57))

@@ -69,10 +69,10 @@ class Cipher:
 		for i in range(4):
 			col = state[i]
 			new_column = [
-				ffm.add(ffm.multiply(col[0], 0x02), ffm.multiply(col[1], 0x03), col[2], col[3]),
-				ffm.add(col[0], ffm.multiply(col[1], 0x02), ffm.multiply(col[2], 0x03), col[3]),
-				ffm.add(col[0], col[1], ffm.multiply(col[2], 0x02), ffm.multiply(col[3], 0x03)),
-				ffm.add(ffm.multiply(col[0], 0x03), col[1], col[2], ffm.multiply(col[3], 0x02))
+				ffm.add_bytes(ffm.multiply(col[0], 0x02), ffm.multiply(col[1], 0x03), col[2], col[3]),
+				ffm.add_bytes(col[0], ffm.multiply(col[1], 0x02), ffm.multiply(col[2], 0x03), col[3]),
+				ffm.add_bytes(col[0], col[1], ffm.multiply(col[2], 0x02), ffm.multiply(col[3], 0x03)),
+				ffm.add_bytes(ffm.multiply(col[0], 0x03), col[1], col[2], ffm.multiply(col[3], 0x02))
 			]
 			state[i] = new_column
 		return state
