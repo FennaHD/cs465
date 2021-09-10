@@ -17,6 +17,11 @@ class CipherTest(unittest.TestCase):
 		                                 [0xb8, 0xb4, 0x5d, 0xe5],
 		                                 [0x1e, 0x41, 0x52, 0x30]]
 
+		self.mix_columns_initial_state = [[0xd4, 0xbf, 0x5d, 0x30],
+		                                 [0xe0, 0xb4, 0x52, 0xae],
+		                                 [0xb8, 0x41, 0x11, 0xf1],
+		                                 [0x1e, 0x27, 0x98, 0xe5]]
+
 	def test_sub_byte_positive(self):
 		expected = [[0xd4, 0x27, 0x11, 0xae],
 		            [0xe0, 0xbf, 0x98, 0xf1],
@@ -44,6 +49,20 @@ class CipherTest(unittest.TestCase):
 		            [0xb8, 0x41, 0x11, 0xf1],
 		            [0x1e, 0x27, 0x98, 0xee]] # this last byte is different
 		self.assertNotEqual(expected, Cipher.shift_rows(self.shift_rows_initial_state))
+
+	def test_mix_columns_positive(self):
+		expected = [[0x04, 0x66, 0x81, 0xe5],
+		            [0xe0, 0xcb, 0x19, 0x9a],
+		            [0x48, 0xf8, 0xd3, 0x7a],
+		            [0x28, 0x06, 0x26, 0x4c]]
+		self.assertEqual(expected, Cipher.mix_columns(self.mix_columns_initial_state))
+
+	def test_mix_columns_negative(self):
+		expected = [[0x04, 0x66, 0x81, 0xe5],
+		            [0xe0, 0xcb, 0x19, 0x9a],
+		            [0x48, 0xf8, 0xd3, 0x7a],
+		            [0x28, 0x06, 0x26, 0x44]] # this last byte is different
+		self.assertNotEqual(expected, Cipher.mix_columns(self.mix_columns_initial_state))
 
 
 if __name__ == '__main__':

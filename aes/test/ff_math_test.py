@@ -10,11 +10,11 @@ class FFMathTest(unittest.TestCase):
 	def test_simple_ff_add_negative(self):
 		self.assertNotEqual(0xd3, ffm.add(0x57, 0x83))
 
-	def test_nested_ff_add_positive(self):
-		self.assertEqual(0xfe, ffm.add(0x57, ffm.add(0xae, 0x07)))
+	def test_multi_byte_ff_add_positive(self):
+		self.assertEqual(0xfe, ffm.add(0x57, 0xae, 0x07))
 
-	def test_nested_ff_add_negative(self):
-		self.assertNotEqual(0xff, ffm.add(0x57, ffm.add(0xae, 0x07)))
+	def test_multi_byte_ff_add_negative(self):
+		self.assertNotEqual(0xff, ffm.add(0x57, 0xae, 0x07))
 
 	def test_x_time_no_overflow_positive(self):
 		self.assertEqual(0xae, ffm.x_time(0x57))

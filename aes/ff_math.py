@@ -3,12 +3,14 @@ import functools as ft
 
 class FFMath:
 
-	"""
-	Performs finite field add, which is basically just an XOR
-	"""
 	@staticmethod
-	def add(byte1, byte2):
-		return byte1 ^ byte2
+	def add(*args):
+		"""
+		Performs finite field add, which is basically just an XOR.
+		*args is a variable length array of integer bytes.
+		Being able to handle multiple bytes in the same method is useful to make code less readable in cases like mix_columns
+		"""
+		return ft.reduce(lambda byte1, byte2: byte1 ^ byte2, args)
 
 	"""
 	Equivalent to performing `byte` * 0x02. We do this by performing a left shift. 
