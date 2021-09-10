@@ -22,6 +22,16 @@ class CipherTest(unittest.TestCase):
 		                                 [0xb8, 0x41, 0x11, 0xf1],
 		                                 [0x1e, 0x27, 0x98, 0xe5]]
 
+		self.add_round_key_initial_state = [[0x04, 0x66, 0x81, 0xe5],
+		                                    [0xe0, 0xcb, 0x19, 0x9a],
+		                                    [0x48, 0xf8, 0xd3, 0x7a],
+		                                    [0x28, 0x06, 0x26, 0x4c]]
+
+		self.add_round_key_initial_round_key = [[0xa0, 0xfa, 0xfe, 0x17],
+		                                        [0x88, 0x54, 0x2c, 0xb1],
+		                                        [0x23, 0xa3, 0x39, 0x39],
+		                                        [0x2a, 0x6c, 0x76, 0x05]]
+
 	def test_sub_byte_positive(self):
 		expected = [[0xd4, 0x27, 0x11, 0xae],
 		            [0xe0, 0xbf, 0x98, 0xf1],
@@ -63,6 +73,20 @@ class CipherTest(unittest.TestCase):
 		            [0x48, 0xf8, 0xd3, 0x7a],
 		            [0x28, 0x06, 0x26, 0x44]] # this last byte is different
 		self.assertNotEqual(expected, Cipher.mix_columns(self.mix_columns_initial_state))
+
+	def test_add_round_key_positive(self):
+		expected = [[0xa4, 0x9c, 0x7f, 0xf2],
+		            [0x68, 0x9f, 0x35, 0x2b],
+		            [0x6b, 0x5b, 0xea, 0x43],
+		            [0x02, 0x6a, 0x50, 0x49]]
+		self.assertEqual(expected, Cipher.add_round_key(self.add_round_key_initial_state, self.add_round_key_initial_round_key))
+
+	def test_add_round_key_negative(self):
+		expected = [[0xa4, 0x9c, 0x7f, 0xf2],
+		            [0x68, 0x9f, 0x35, 0x2b],
+		            [0x6b, 0x5b, 0xea, 0x43],
+		            [0x02, 0x6a, 0x50, 0x44]] # this last byte is different
+		self.assertNotEqual(expected, Cipher.add_round_key(self.add_round_key_initial_state, self.add_round_key_initial_round_key))
 
 
 if __name__ == '__main__':

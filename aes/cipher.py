@@ -77,4 +77,21 @@ class Cipher:
 			state[i] = new_column
 		return state
 
+	@staticmethod
+	def add_round_key(state, round_key):
+		"""
+		Given an input state and round_key, XOR state and round_key and return the resulting state.
+
+		A' E' I' M'         As Es Is Ms       Ak Ek Ik Mk
+		B' F' J' N'    =    Bs Fs Js Ns  xor  Bk Fk Jk Nk
+		C' G' K' O'         Cs Gs Ks Os       Ck Gk Kk Ok
+		D' H' L' P'         Ds Hs Ls Ps       Dk Hk Lk Pk
+		 new_state			   state           round_key
+		"""
+		# Combine both arrays into one so that the columns that are supposed to be XORd match.
+		zipped = list(zip(state, round_key))
+		# Combine the sub arrays so that the bytes that supposed to be XORd match positions.
+		zipped_bytes = list(map(lambda a: list(zip(a[0], a[1])), zipped))
+		# Now that all bytes are matching, XOR all of them and return the new state
+		return list(map(lambda a: list(map(lambda b: b[0] ^ b[1], a)), zipped_bytes))
 
