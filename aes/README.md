@@ -13,3 +13,5 @@ In order to run, edit `aes/aes.py` by changing the strings in lines 11-13:
 Then run by either `python ./aes.py` or `python3 ./aes.py`.
 
 I only looked at the resources listed in the project specification and did not use any additional material.
+
+I pass all the test cases in Appendix C.
