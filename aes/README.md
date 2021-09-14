@@ -6,8 +6,8 @@ E.g. `6c8609a5dff9a0e8fdb368b81f41314f` as a 128 bit hex-string would encrypt to
 
 In order to run, edit `aes/aes.py` by changing the strings in lines 11-13:
 
-`11 cipher_key = ftr.formatted("0f8866b8a9583c8dfb93848e56193d3a117372af1a967846211b87878d5305a7")`  
-`12 input_word = ftr.formatted("6c8609a5dff9a0e8fdb368b81f41314f")`  
+`11 cipher_key = ftr.formatted("000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")`  
+`12 input_word = ftr.formatted("00112233445566778899aabbccddeeff")`  
 `13 action = "ENCRYPT" # must be "ENCRYPT" or"DECRYPT"`
 
 Then run by either `python ./aes.py` or `python3 ./aes.py`.

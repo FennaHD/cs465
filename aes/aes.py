@@ -8,7 +8,7 @@ def aes():
     Note for grader: You only need to change the strings in lines 11-13.
     cipher_key and input_word can handle byte values to be space-separated if you prefer that.
     """
-    cipher_key = ftr.formatted("000102030405060708090a0b0c0d0e0f1011121314151617")
+    cipher_key = ftr.formatted("000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f")
     input_word = ftr.formatted("00112233445566778899aabbccddeeff")
     action = "ENCRYPT" # must be "ENCRYPT" or"DECRYPT"
     if action == "ENCRYPT":
