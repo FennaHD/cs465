@@ -5,6 +5,15 @@ from s_box import SBox
 
 class Cipher(AbstractCipher):
 
+	# Legend
+	INPUT = "input" # cipher input
+	START = "start" # state at start of round[r]
+	S_BOX = "s_box" # state after SubBytes()
+	S_ROW = "s_row" # state after ShiftRows()
+	M_COL = "m_col" # state after MixColumns()
+	K_SCH = "k_sch" # key schedule value for round[r]
+	OUTPUT = "output" # cipher output
+
 	box = SBox()
 
 	def shift_rows(self, state):

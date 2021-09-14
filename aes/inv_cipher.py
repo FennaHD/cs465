@@ -5,6 +5,15 @@ from inv_s_box import InverseSBox
 
 class InverseCipher(AbstractCipher):
 
+	# Legend
+	INPUT = "iinput" # inverse cipher input
+	START = "istart" # state at start of round[r]
+	S_BOX = "is_box" # state after InvSubBytes()
+	S_ROW = "is_row" # state after InvShiftRows()
+	K_SCH = "ik_sch" # key schedule value for round[r]
+	K_ADD = "ik_add" # state after AddRoundKey()
+	OUTPUT = "ioutput" # inverse cipher output
+
 	box = InverseSBox()
 
 	def shift_rows(self, state):

@@ -12,16 +12,42 @@ class Encryptor:
 
 	def encrypt(self, word, cipher_key):
 
+		ftr.print(0, self.cph.INPUT, word)
+
 		cipher_key = CipherKey(cipher_key)
 
 		schedule = ke.get_schedule(cipher_key)
+		ftr.print(0, self.cph.K_SCH, ftr.str_from_state(schedule[0]))
+
 		state = self.cph.add_round_key(ftr.state_from_str(self.__formatted_word(word)), schedule[0])
 
-		for r in range(cipher_key.nr - 1): # "r" for "round"
-			state = self.cph.add_round_key(self.cph.mix_columns(self.cph.shift_rows(self.cph.sub_bytes(state))), schedule[r + 1])
+		for r in range(1, cipher_key.nr): # "r" for "round"
+			ftr.print(r, self.cph.START, ftr.str_from_state(state))
 
-		state = self.cph.add_round_key(self.cph.shift_rows(self.cph.sub_bytes(state)), schedule[cipher_key.nr])
+			state = self.cph.sub_bytes(state)
+			ftr.print(r, self.cph.S_BOX, ftr.str_from_state(state))
 
+			state = self.cph.shift_rows(state)
+			ftr.print(r, self.cph.S_ROW, ftr.str_from_state(state))
+
+			state = self.cph.mix_columns(state)
+			ftr.print(r, self.cph.M_COL, ftr.str_from_state(state))
+
+			state = self.cph.add_round_key(state, schedule[r])
+
+			ftr.print(r, self.cph.K_SCH, ftr.str_from_state(schedule[r]))
+
+		state = self.cph.sub_bytes(state)
+		ftr.print(cipher_key.nr, self.cph.S_BOX, ftr.str_from_state(state))
+
+		state = self.cph.shift_rows(state)
+		ftr.print(cipher_key.nr, self.cph.S_ROW, ftr.str_from_state(state))
+
+		state = self.cph.add_round_key(state, schedule[cipher_key.nr])
+
+		ftr.print(cipher_key.nr, self.cph.K_SCH, ftr.str_from_state(schedule[cipher_key.nr]))
+
+		ftr.print(cipher_key.nr, self.cph.OUTPUT, ftr.str_from_state(state))
 		return ftr.str_from_state(state)
 
 	def __formatted_word(self, word):

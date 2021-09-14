@@ -65,3 +65,28 @@ class Formatter:
 		paste the auto-grader input.
 		"""
 		return to_format if " " in to_format else " ".join(to_format[i:i + 2] for i in range(0, len(to_format), 2))
+
+	@staticmethod
+	def print(round_num, legend, hex_string):
+		"""
+		Matches format from Appendix C for debugging.
+
+		Legend for CIPHER (ENCRYPT) (round number r = 0 to 10, 12 or 14):
+			input: cipher input
+			start: state at start of round[r]
+			s_box: state after SubBytes()
+			s_row: state after ShiftRows()
+			m_col: state after MixColumns()
+			k_sch: key schedule value for round[r]
+			output: cipher output
+
+		Legend for INVERSE CIPHER (DECRYPT) (round number r = 0 to 10, 12 or 14):
+			iinput: inverse cipher input
+			istart: state at start of round[r]
+			is_box: state after InvSubBytes()
+			is_row: state after InvShiftRows()
+			ik_sch: key schedule value for round[r]
+			ik_add: state after AddRoundKey()
+			ioutput: inverse cipher output
+		"""
+		print(f'round[{round_num}].{legend}: {hex_string.replace(" ", "")}')
