@@ -2,6 +2,9 @@ from __future__ import print_function
 import struct
 import io
 
+"""
+This script was taken from https://github.com/ajalt/python-sha1. All credit to them.
+"""
 
 def _left_rotate(n, b):
 	"""Left rotate a 32-bit integer n by b bits."""
@@ -65,20 +68,25 @@ class Sha1Hash(object):
 	block_size = 64
 
 	def __init__(self):
-		# Initial digest variables
+		# Initial digest variables.
 		self._h = (
-			0x67452301,
-			0xEFCDAB89,
-			0x98BADCFE,
-			0x10325476,
-			0xC3D2E1F0,
+			# Edit: This was the actual IV, but we modified it to the given MAC to
+			# "continue where we left off."
+			0xe384efad,
+			0xf26767a6,
+			0x13162142,
+			0xb5ef0efb,
+			0xb9d7659a,
 		)
 
 		# bytes object with 0 <= len < 64 used to store the end of the message
 		# if the message length is not congruent to 64
 		self._unprocessed = b''
 		# Length in bytes of all data that has been processed so far
-		self._message_byte_length = 0
+		# Edit: It was originally 0 bytes, but in order to trick the algorithm we set it
+		# to 128 since the algorithm would have already processed 2 blocks (512 bits each,
+		# 1024 bits total, 128 bytes total)
+		self._message_byte_length = 128
 
 	def update(self, arg):
 		"""Update the current digest.
