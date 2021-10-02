@@ -1,0 +1,1 @@
+Implementation of the Diffie-Hellman protocol. All the logic of the algorithm is in `diffie_hellman.py`. In order to run, do `python main.py` or `python3 main.py`. Note that all values are hardcoded. The algorithm can run with different values by changing `g`, `a`, and/or `p` in `main.py`, then changing the print statement in line 22. 
